@@ -4,7 +4,7 @@ services:
     image: python:3-slim
     container_name: jureg_dice_roll
     volumes:
-      - ${PWD}:/home/bot
+      - .:/home/bot
     restart: on-failure
     tty: true
     environment:
