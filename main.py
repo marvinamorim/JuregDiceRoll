@@ -11,6 +11,8 @@ bot = telebot.TeleBot(settings.TOKEN)
 
 
 def check_dice_call(d):
+    if d == None:
+        return False
     try:
         if d[0] == "*" and d[-1] == "*" and d[1] == "d" and d[2:-1].isnumeric():
             return True
