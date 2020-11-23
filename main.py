@@ -3,6 +3,7 @@ import random
 import telebot
 from loguru import logger
 from telebot import types
+from emoji import emojize
 
 from config import settings
 
@@ -40,7 +41,7 @@ def dicemenu(message):
     rkm.add(dices[0])
     rkm.row(dices[1], dices[2], dices[3])
     rkm.row(dices[4], dices[5], dices[6])
-    msg = "Escolha um dado para rolar"
+    msg = f"Escolha um {emojize(':game_die:')} para rolar"
     bot.send_message(message.chat.id, msg, reply_markup=rkm)
     logger.info(f"Chat: {message.chat.id}, Command: /dicemenu")
 
@@ -48,10 +49,10 @@ def dicemenu(message):
 @bot.message_handler(
     func=lambda message: check_dice_call(message.text), content_types=["text"]
 )
-def bot_pedidos(message):
+def roll_dice(message):
     dice = int(message.text[2:-1]) + 1
     roll = random.randrange(1, dice)
-    msg = f"Rolagem: {roll}"
+    msg = f"Rolagem: {emojize(':game_die:')} {roll}"
     bot.send_message(message.chat.id, msg, reply_to_message_id=message.message_id)
     logger.info(f"Chat: {message.chat.id}, Roll: {roll}")
 
